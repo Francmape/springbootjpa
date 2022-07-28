@@ -1,6 +1,7 @@
 package com.skilciti.springdatajpatutorial.repository;
 
 import com.skilciti.springdatajpatutorial.entity.Course;
+import com.skilciti.springdatajpatutorial.entity.Student;
 import com.skilciti.springdatajpatutorial.entity.Teacher;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +91,30 @@ class CourseRepositoryTest {
 
         System.out.println(">>>  COURSES: " + courses);
 
+    }
+
+    @Test
+    public void saveCourseWithStudentAndTeacher() {
+
+        Teacher teacher = Teacher.builder()
+                .firstName("Ruth")
+                .lastName("Kalinda")
+                .build();
+
+        Student student = Student.builder()
+                .firstName("Ngongi")
+                .lastName("Wawera")
+                .email("ngowa@gmail.com")
+                .build();
+
+        Course course = Course.builder()
+                .title("PUMP101")
+                .credit(4)
+                .teacher(teacher)
+                .build();
+        course.addStudents(student);
+
+        courseRepository.save(course);
     }
 
 
